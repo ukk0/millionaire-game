@@ -1,4 +1,4 @@
-from trivia_api import return_questions
+from utils.trivia_api import return_questions
 
 class Player:
 
