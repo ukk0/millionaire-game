@@ -1,4 +1,4 @@
-from utils.utils import *
+from utils.helpers import *
 
 def run_game():
     while True:

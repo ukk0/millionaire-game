@@ -1,5 +1,6 @@
-from typing import Dict
 import random
+from typing import Dict
+
 
 class Lifeline:
 

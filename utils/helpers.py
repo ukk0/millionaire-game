@@ -1,8 +1,8 @@
 import sys
 import random
 
-from player import Player
-from lifeline import Lifeline
+from utils.player import Player
+from utils.lifeline import Lifeline
 
 
 
