@@ -1,5 +1,6 @@
 from utils.helpers import *
 
+
 def run_game():
     while True:
         response = input(
@@ -14,7 +15,11 @@ def run_game():
             print("Please provide a valid response.")
     print(game_rules)
 
-    while player_obj.wants_to_play and player_obj.no_wrong_answer and player_obj.questions_answered < 15:
+    while (
+        player_obj.wants_to_play
+        and player_obj.no_wrong_answer
+        and player_obj.questions_answered < 15
+    ):
         ask_next_question(player_obj)
 
 

@@ -5,17 +5,17 @@ from utils.player import Player
 from utils.lifeline import Lifeline
 
 
-
-game_rules = ("Answer 15 multiple-choice questions to win the top prize.\n "
-              "Questions will get harder as you progress.\n "
-              "You can walk away anytime with your winnings, but a wrong answer\n "
-              "drops you to the last safe tier.\n"
-
-              "Lifelines: \n"
-              "- '50:50' removes 2 wrong options,\n"
-              "- 'Ask the Audience' shows preferences and\n"
-              "- 'Phone a friend' gives simulated help.\n"
-              "Good luck!\n\n")
+game_rules = (
+    "Answer 15 multiple-choice questions to win the top prize.\n "
+    "Questions will get harder as you progress.\n "
+    "You can walk away anytime with your winnings, but a wrong answer\n "
+    "drops you to the last safe tier.\n"
+    "Lifelines: \n"
+    "- '50:50' removes 2 wrong options,\n"
+    "- 'Ask the Audience' shows preferences and\n"
+    "- 'Phone a friend' gives simulated help.\n"
+    "Good luck!\n\n"
+)
 
 
 prize_tiers = {
@@ -33,7 +33,7 @@ prize_tiers = {
     12: 125000,
     13: 250000,
     14: 500000,
-    15: 1000000
+    15: 1000000,
 }
 
 
@@ -74,15 +74,15 @@ def print_out_question(question_obj, answers_dict=None):
         wrong_answers = question_obj["incorrectAnswers"]
         all_answers = wrong_answers + correct_answer
         answers_dict = {
-            "A": all_answers.pop(random.randint(0,len(all_answers)-1)),
-            "B": all_answers.pop(random.randint(0,len(all_answers)-1)),
-            "C": all_answers.pop(random.randint(0,len(all_answers)-1)),
-            "D": all_answers.pop(random.randint(0,len(all_answers)-1))
+            "A": all_answers.pop(random.randint(0, len(all_answers) - 1)),
+            "B": all_answers.pop(random.randint(0, len(all_answers) - 1)),
+            "C": all_answers.pop(random.randint(0, len(all_answers) - 1)),
+            "D": all_answers.pop(random.randint(0, len(all_answers) - 1)),
         }
-    correct_answer_key = [key for key, value in answers_dict.items() if value == correct_answer[0]]
-    rows = [
-        f"{key}: {value}" for key, value in answers_dict.items()
+    correct_answer_key = [
+        key for key, value in answers_dict.items() if value == correct_answer[0]
     ]
+    rows = [f"{key}: {value}" for key, value in answers_dict.items()]
     for row in rows:
         print(row)
     print("\n")
@@ -99,7 +99,9 @@ def print_out_lifelines(player_obj):
 
 
 def handle_quitting(player_obj):
-    print(f"Your game has ended and you are going home with ${player_obj.current_winnings}. Thanks for playing!")
+    print(
+        f"Your game has ended and you are going home with ${player_obj.current_winnings}. Thanks for playing!"
+    )
     sys.exit()
 
 
@@ -130,7 +132,9 @@ def process_response(response, player_obj, answers_dict, question_obj):
         if answers_dict[response.upper()] == question_obj["correctAnswer"]:
             player_obj.questions_answered += 1
             player_obj.current_winnings = prize_tiers[player_obj.questions_answered]
-            print(f"Congratulations, that's correct! You have won ${player_obj.current_winnings}!\n\n")
+            print(
+                f"Congratulations, that's correct! You have won ${player_obj.current_winnings}!\n\n"
+            )
 
             if player_obj.questions_answered == 15:
                 print("That's the end of the game. Thanks for playing!")
@@ -165,7 +169,8 @@ def ask_next_question(player_obj):
 
     while True:
         response = input(
-            "\nPlease provide your answer A/B/C/D or 1/2/3 to use a lifeline. Press Q to quit here.\n")
+            "\nPlease provide your answer A/B/C/D or 1/2/3 to use a lifeline. Press Q to quit here.\n"
+        )
         action = process_response(response, player_obj, answers_dict, question_obj)
 
         if action == "CORRECT":
@@ -173,6 +178,8 @@ def ask_next_question(player_obj):
         elif action == "GAME_OVER":
             break
         elif action == "USE_LIFELINE":
-            answers_dict = handle_lifeline(response, player_obj, answers_dict, question_obj, correct_answer)
+            answers_dict = handle_lifeline(
+                response, player_obj, answers_dict, question_obj, correct_answer
+            )
         elif action == "INVALID":
             continue

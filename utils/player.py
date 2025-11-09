@@ -1,7 +1,7 @@
 from utils.trivia_api import return_questions
 
-class Player:
 
+class Player:
     wants_to_play = True
     no_wrong_answer = True
     fifty_fifty_available = True
